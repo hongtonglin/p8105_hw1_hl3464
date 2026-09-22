@@ -4,4 +4,64 @@ author: "Hongtong Lin"
 date: "2026-09-22"
 output: github_document
 ---
+  
+## Load Libraries  
+```{r libraries, message = F}
+library(palmerpenguins)
+library(ggplot2)
+```
+  
+  
+## Problem 1  
+
+```{r load penguin data set}
+data("penguins", package = "palmerpenguins") 
+penguins # briefly read the data
+```
+
+column names/variable name:  
+```{r col names}
+colnames(penguins)
+# the column names or variables in this penguins data set are ------
+# species, island, bill_length_mm, bill_depth_mm, flipper_length_mm,
+# body_mass_g, sex, year 
+# ------
+```
+  
+size of the data frame:  
+```{r data frame size}
+dim(penguins)  # rows*cols
+nrow(penguins) # the data set has 344 rows
+ncol(penguins) # the data set has 8 columns
+```
+  
+the mean flipper length:  
+
+```{r mean flipper length}
+mean(penguins$flipper_length_mm, na.rm = T) 
+# the mean flipper length is 200.92 mm after removing the 
+# missing values (NA) from this column.
+```
+  
+Make a scatterplot of `flipper_length_mm` (y) vs `bill_length_mm` (x)  
+```{r scatterplot, message=F, warning=F}
+ggplot(
+  penguins,
+  aes(
+    y = flipper_length_mm,
+    x = bill_length_mm,
+    color = species
+  )) +
+  labs(
+    x = "Bill Length (mm)",
+    y = "Flipper Length (mm)",
+    color = "Species"
+  )+ 
+  geom_point()  
+
+ggsave("p8105_hw1_problem1_scatterplot_20260922.png")
+# save the scatterplot as a png file into current directory
+```
+
+  
 
